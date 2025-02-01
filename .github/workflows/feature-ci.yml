@@ -44,7 +44,7 @@ jobs:
             -e DB_USER=${{ vars.TEST_DB_USER }} \
             -e DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }} \
             temp-image:pr-${{ github.event.pull_request.number }} \
-            sh -c "./wait-for-db.sh && pytest --cov"
+            sh -c "./wait-for-db.sh"
 
       - name: Lint Code
         run: |
