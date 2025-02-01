@@ -34,6 +34,7 @@ jobs:
           tags: temp-image:pr-${{ github.event.pull_request.number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          load: true
 
       - name: Run Tests
         run: |
