@@ -1,0 +1,42 @@
+---
+name: Develop Deployment
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    permissions:
+      deployments: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USER }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          tags: |
+            ${{ vars.REGISTRY_URL }}/app:staging-${{ github.sha }}
+            ${{ vars.REGISTRY_URL }}/app:staging-latest
+          push: true
+
+      - name: Deploy to Kubernetes
+        uses: azure/k8s-deploy@v4
+        with:
+          namespace: staging
+          manifests: k8s/staging/
+          images: |
+            ${{ vars.REGISTRY_URL }}/app:staging-${{ github.sha }}
