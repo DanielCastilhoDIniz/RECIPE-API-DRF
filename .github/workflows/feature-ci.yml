@@ -38,7 +38,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker run --rm \
+          docker compose run --rm recipe \
             --network host \
             -e DB_NAME=${{ vars.TEST_DB_NAME }} \
             -e DB_USER=${{ vars.TEST_DB_USER }} \
