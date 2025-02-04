@@ -151,4 +151,3 @@ jobs:
         run: |
           docker push $DOCKER_IMAGE
 
-okok
