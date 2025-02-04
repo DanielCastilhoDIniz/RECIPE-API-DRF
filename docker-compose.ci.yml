@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        - DEV=true
+    env_file:
+    - ./dotenv_files/.env
+
+    depends_on:
+      psql:
+        condition: service_healthy
+  psql:
+    image: postgres:13-alpine
+    env_file:
+    - ./dotenv_files/.env
+
