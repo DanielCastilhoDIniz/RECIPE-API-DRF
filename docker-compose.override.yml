@@ -1,0 +1,12 @@
+
+services:
+  app:
+    env_file:
+      - ./dotenv_files/.env  # Apenas no ambiente de desenvolvimento
+    build:
+      args:
+        - DEV=true
+    volumes:
+      - ./app:/app
+      - ./data/web/static:/data/web/static/
+      - ./data/web/media:/data/web/media/

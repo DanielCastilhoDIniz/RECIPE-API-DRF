@@ -1,16 +1,17 @@
 ---
-name: Feature Validation
-
 on:
   pull_request:
-    branches:
-      - develop
-    types: [opened, synchronize]
+    branches:  # Adicione as branches de origem e destino
+      - develop  # Branch destino (PR target)
+      - main    # Branch destino alternativa
+      - 'feature/**'  # Branch de origem (Padrão para features)
+    types: [opened, synchronize, reopened]
 
 jobs:
   validate:
-    name: Build & Test
+    name: Validate Feature
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:15-alpine
@@ -20,11 +21,13 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
         ports:
           - 5432:5432
+        options: --health-cmd "pg_isready -U ${{ vars.TEST_DB_USER }}" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
+      - name: Configurar Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build Image
@@ -36,18 +39,24 @@ jobs:
           cache-to: type=gha,mode=max
           load: true
 
-      - name: Run Tests
+      - name: Subir Docker Compose
+        run: docker-compose -f docker-compose.ci.yml up -d
+
+      - name: Aguardar Banco de Dados
         run: |
-          docker compose run --rm recipe \
-            --network host \
-            -e DB_NAME=${{ vars.TEST_DB_NAME }} \
-            -e DB_USER=${{ vars.TEST_DB_USER }} \
-            -e DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }} \
-            temp-image:pr-${{ github.event.pull_request.number }} \
-            sh -c "./wait-for-db.sh"
+          docker-compose -f docker-compose.ci.yml exec app sh -c "./scripts/wait-for-db.sh"
+
+      - name: Rodar Migrações
+        run: docker-compose -f docker-compose.ci.yml exec app python manage.py migrate
+
+      - name: Rodar Testes
+        run: docker-compose -f docker-compose.ci.yml exec app pytest
 
       - name: Lint Code
         run: |
           docker run --rm \
             temp-image:pr-${{ github.event.pull_request.number }} \
             sh -c "flake8 && black --check --exclude migrations ."
+
+      - name: Derrubar os containers
+        run: docker-compose -f docker-compose.ci.yml down
