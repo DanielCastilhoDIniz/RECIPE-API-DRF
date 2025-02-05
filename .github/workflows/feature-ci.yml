@@ -56,9 +56,15 @@ jobs:
       - name: Subir Docker Compose
         run: docker compose -f docker-compose.ci.yml up -d
         env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ vars.DEBUG }}
+          ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS }}
+          DB_ENGINE: ${{ vars.DB_ENGINE }}
           POSTGRES_DB: ${{ vars.POSTGRES_DB }}
           POSTGRES_USER: ${{ vars.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST: ${{ vars.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
 
       - name: Aguardar Banco de Dados
         run: |

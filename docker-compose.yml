@@ -32,7 +32,7 @@ services:
     env_file:
     - ./dotenv_files/.env
 
-    
+
 
     networks:
       - app_network
