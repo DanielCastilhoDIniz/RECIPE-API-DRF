@@ -68,7 +68,7 @@ jobs:
 
       - name: Aguardar Banco de Dados
         run: |
-          docker compose -f docker-compose.ci.yml exec app sh -c "./scripts/wait_for_db.sh"
+          docker compose run --rm app sh -c python manage.py wait_for_db"
 
       - name: Rodar Migrações
         run: docker compose -f docker-compose.ci.yml exec app python manage.py migrate
