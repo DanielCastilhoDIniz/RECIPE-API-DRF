@@ -55,6 +55,10 @@ jobs:
 
       - name: Subir Docker Compose
         run: docker compose -f docker-compose.ci.yml up -d
+        env:
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Aguardar Banco de Dados
         run: |
