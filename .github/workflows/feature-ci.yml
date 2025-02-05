@@ -38,17 +38,19 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           load: true
-      - name: Configurar variáveis de ambiente
+      - name: Criar arquivo .env
         run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-          echo "DEBUG=${{ vars.DEBUG }}" >> .env
-          echo "ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}" >> .env
-          echo "DB_ENGINE=${{ vars.DB_ENGINE }}" >> .env
-          echo "POSTGRES_DB=${{ vars.POSTGRES_DB }}" >> .env
-          echo "POSTGRES_USER=${{ vars.POSTGRES_USER }}" >> .env
-          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
-          echo "POSTGRES_HOST=${{ vars.POSTGRES_HOST }}" >> .env
-          echo "POSTGRES_PORT=${{ vars.POSTGRES_PORT }}" >> .env
+          cat <<EOF > dotenv_files/.env
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          DEBUG=${{ vars.DEBUG }}
+          ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}
+          DB_ENGINE=${{ vars.DB_ENGINE }}
+          POSTGRES_DB=${{ vars.POSTGRES_DB }}
+          POSTGRES_USER=${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST=${{ vars.POSTGRES_HOST }}
+          POSTGRES_PORT=${{ vars.POSTGRES_PORT }}
+          EOF
 
       - name: Subir Docker Compose
         run: docker compose -f docker-compose.ci.yml up -d
