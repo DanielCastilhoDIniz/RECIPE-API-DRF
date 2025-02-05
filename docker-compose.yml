@@ -16,7 +16,6 @@ services:
     env_file:
     - ./dotenv_files/.env
 
-
     depends_on:
       psql:
         condition: service_healthy
