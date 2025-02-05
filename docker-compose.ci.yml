@@ -19,7 +19,7 @@ services:
 
     depends_on:
       psql:
-        condition: service_healthy
+
   psql:
     image: postgres:13-alpine
     env_file:
