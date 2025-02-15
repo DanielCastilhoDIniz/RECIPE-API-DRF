@@ -1,10 +1,11 @@
----
+name: CI/CD Pipeline
+
 on:
   pull_request:
-    branches:  # Adicione as branches de origem e destino
-      - develop  # Branch destino (PR target)
-      - main    # Branch destino alternativa
-      - 'feature/**'  # Branch de origem (Padrão para features)
+    branches:
+      - develop
+      - main
+      - 'feature/**'
     types: [opened, synchronize, reopened]
 
 jobs:
@@ -38,6 +39,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           load: true
+
       - name: Criar arquivo .env dinamicamente
         run: |
           mkdir -p dotenv_files
@@ -73,6 +75,7 @@ jobs:
           POSTGRES_DB: ${{ vars.POSTGRES_DB }}
           POSTGRES_USER: ${{ vars.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+
       - name: Rodar Migrações
         run: docker compose -f docker-compose.ci.yml exec app python manage.py migrate
 
@@ -86,4 +89,4 @@ jobs:
             sh -c "flake8 && black --check --exclude migrations ."
 
       - name: Derrubar os containers
-        run: docker-compose -f docker-compose.ci.yml down
+        run: docker compose -f docker-compose.ci.yml down
