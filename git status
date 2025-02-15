@@ -1,0 +1,233 @@
+[33mcommit 22ff2b8b6542fc34831e09537aa53dc8e66c3d41[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/user_api[m[33m, [m[1;31morigin/feature/user_api[m[33m)[m
+Author: DanielCastilhoDIniz <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 23:16:40 2025 -0300
+
+    chore(db):ajusta  espera do bd
+
+[33mcommit 15a72034e62188f82c897a8d718a844929a8165f[m
+Author: DanielCastilhoDIniz <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 23:14:28 2025 -0300
+
+    chore(db):ajusta  espera do bd
+
+[33mcommit aa1ab5c69dcd12e6366fffada8c3d93fa25a8f7f[m
+Author: DanielCastilhoDIniz <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 22:32:14 2025 -0300
+
+    chore(db):ajusta  espera do bd
+
+[33mcommit 3678c686f77242448c5ddeb8ec8fe09a5cecff53[m
+Author: DanielCastilhoDIniz <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 22:29:20 2025 -0300
+
+    chore(db):ajusta  espera do bd
+
+[33mcommit c5a24f1157975aa6b0aea9f299b78727f083975c[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 21:47:37 2025 -0300
+
+    chore(ci):reogranizando ci/cd
+
+[33mcommit 2e0aa0095b04a9d581f0726305282d2843a97376[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Feb 14 21:19:36 2025 -0300
+
+    chore(docker): reconstruindo container docker
+
+[33mcommit cdeb36aa68db1ce40866f4abfca1be0e8453d184[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:33:12 2025 -0300
+
+    CI(wait_for_db): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit f480e02737d9d13bbf7f2c756567c50a2ba5e5e2[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:29:44 2025 -0300
+
+    CI(wait_for_db): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 762e6f32fe2e409a15d6f707f667a50c9f73911b[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:18:25 2025 -0300
+
+    CI(wait_for_db): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit d56dcb3e95f4aed57f9e65a9b9de08597f507ae1[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:14:50 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 1d0b97bfd0f381fd479175eb315381ad717517db[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:04:34 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit f59a002193ae27911e9c57bcab98373d634e5791[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 18:00:28 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 079fa50b0c5e485473281a6449e8b62824c0f6b7[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 17:41:32 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 59a253a04be4d95aa65712d2079f211872a659ce[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 17:30:21 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit c7caebad3553afe6ae05c2e84a5e177ee836c3be[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 17:25:58 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 0c625e7b9ffeaac0f368d443e8e1266043ce1c4e[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 17:17:28 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit c14b40d6217130a76128ddfc01f71926b6e83bde[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 17:09:50 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 92b1c59dd672ff9f27e6078b4668836aa12bcdab[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 16:58:13 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit 3aa210f0ad336969643a17dfba8c6ac9fcec3416[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 16:54:24 2025 -0300
+
+    CI(docker): ajustes de variaveis de  ambiente de dev e prod
+
+[33mcommit ff679dbc0a21bc599069762f3d7d9f2b2f82c064[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 05:35:25 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 5c667550f74861c0ebe093e81aa4539d913730da[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 05:32:00 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 932c72dcbb5c19b2b2ec1f3f51e2fc548970983b[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Wed Feb 5 05:27:19 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 74c4c9b78f967c32835733f96fc45789c4bc43f7[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 21:24:38 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit d26eb26e6d4fc60688a9096c343270185b4bab54[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 21:22:23 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 553544dbf07b0421ff1c0a606aa57bc69c28710b[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 21:18:28 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 899dfd276ce674adf6872dd8a2778ddef8e09dfc[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 21:05:08 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 6cfbe62d8a571a7339a97103b6901197212e2a42[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 21:03:02 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit d40abd61b6ebacca621e4d9c398b3a643d219973[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 20:58:35 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 3c4e9c55ae6eb3d4baf21e143df5a2ee93e26c30[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Tue Feb 4 20:47:35 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 0fc7b74833e865820a7185d8da2056226836340a[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Mon Feb 3 22:07:12 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit 203f81d2fcccf99ae2ea9c239b90200877191908[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Mon Feb 3 21:41:48 2025 -0300
+
+    CI(docker): ajustes dos ambiente de dev e prod
+
+[33mcommit bab3874691938afe0adcb761ffa760b7a70f51f2[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Sat Feb 1 19:34:16 2025 -0300
+
+    chore(gitignore): adiciona regras para ignorar pastas data e postgres
+
+[33mcommit 9f3fac3bff2cc25ea4e478b1ee7118c15928b6a8[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 23:56:28 2025 -0300
+
+    fix(test): ajuste wait_for_db
+
+[33mcommit fa77cadf6f58ad872bb089c84b0ad6f080909d9c[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 23:52:13 2025 -0300
+
+    fix(test): ajuste wait_for_db
+
+[33mcommit cac49519871571ad23f5de9a2eb65862eec23e5d[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 23:43:54 2025 -0300
+
+    feat(api): criação do app core
+
+[33mcommit d76b52928be6991cce11e562672d3199fa970d57[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 22:42:19 2025 -0300
+
+    fix(ci): adiciona a linha load: true para carregar variavel de ambiente
+
+[33mcommit 062ce9b0221d36a8b2495a1e683a73dff47cb391[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 21:53:39 2025 -0300
+
+    fix(api): adicina o arquivo command.sh a pasta scripts
+
+[33mcommit 282f1f5fc817ae61eca00a5d0bcf8f409d9e4bec[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 21:20:34 2025 -0300
+
+    feat(api): setup para criação da api user
+
+[33mcommit 2a7dca33c0af470e69dcd789247ae23f7852845d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdevelop[m[33m)[m
+Author: Daniel Castilho <danielcastilhodiniz@gmail.com>
+Date:   Fri Jan 31 14:13:05 2025 -0300
+
+    Initial commit
