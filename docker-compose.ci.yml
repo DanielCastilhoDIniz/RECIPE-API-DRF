@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        - DEV=false  # Desativa dependências de desenvolvimento
+        - DEV=false
     environment:
       - DB_HOST=db
       - DB_NAME=devdb
@@ -13,7 +13,7 @@ services:
       - DB_PASS=changeit
     depends_on:
       db:
-        condition: service_healthy  # Espera pelo banco estar saudável
+        condition: service_healthy
 
   db:
     image: postgres:15-alpine
