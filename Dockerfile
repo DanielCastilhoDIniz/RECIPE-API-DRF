@@ -1,67 +1,57 @@
-## Define a versão do Python a ser usada e a imagem base, baseada no Alpine Linux.
-# O Alpine é utilizado por ser uma distribuição leve, ideal para imagens Docker.
 ARG PYTHON_VERSION=3.11.3
 FROM python:${PYTHON_VERSION}-alpine3.18
 
-# Informações sobre a imagem, como o mantenedor, versão e descrição.
 LABEL maintainer="danielcastilho.com" version="1.0" description="API RECIPE"
 
-# Define variáveis de ambiente para otimizar o comportamento do Python.
-# PYTHONDONTWRITEBYTECODE: Impede a criação de arquivos .pyc, economizando espaço.
 ENV PYTHONDONTWRITEBYTECODE=1
-# PYTHONUNBUFFERED: Garante que os logs sejam exibidos em tempo real, sem buffer.
 ENV PYTHONUNBUFFERED=1
 
-# Copia os arquivos de dependências e scripts para dentro do contêiner.
-# requirements.txt: Lista de dependências de produção.
-# requirements.dev.txt: Lista de dependências adicionais para desenvolvimento.
-COPY requirements.txt /tmp/requirements.txt
-COPY requirements.dev.txt /tmp/requirements.dev.txt
-# Copia o código-fonte da aplicação para o diretório /app no contêiner.
+# Copia os arquivos de dependências e código-fonte para o contêiner
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./scripts /scripts
 COPY ./app /app
-# Copia os scripts auxiliares para o contêiner.
-COPY scripts /scripts
 
-# Verifica se o arquivo requirements.txt existe, para evitar erros durante a construção.
-RUN test -f /tmp/requirements.txt || (echo "Arquivo requirements.txt não encontrado" && exit 1)
-
-# Define o diretório de trabalho dentro do contêiner como /app.
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Expõe a porta 8000, usada pelo servidor Django para receber requisições.
+# Expõe a porta 8000 para acesso externo
 EXPOSE 8000
 
-# Define uma variável ARG (argumento de construção) para determinar se o ambiente é de desenvolvimento.
-# Essa variável será utilizada para instalar dependências de desenvolvimento, se necessário.
+# Define variáveis de ambiente
 ARG DEV=false
 
-# Configuração e instalação de dependências.
-RUN pip install --upgrade pip --no-cache-dir && \
-    pip install pip-audit --no-cache-dir && \
-    pip-audit -r /tmp/requirements.txt || (echo "Falha na auditoria de segurança" && exit 1) && \
-    pip install -r /tmp/requirements.txt --no-cache-dir && \
-    if [ "$DEV" = "true" ]; then \
-        test -f /tmp/requirements.dev.txt || (echo "Arquivo requirements.dev.txt não encontrado" && exit 1); \
-        pip install -r /tmp/requirements.dev.txt --no-cache-dir; \
-    fi && \
-    adduser --disabled-password --no-create-home duser && \
+# Instala as dependências do projeto
+# Instala as dependências do sistema
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
     apk add --update --no-cache postgresql-client jpeg-dev && \
     apk add --update --no-cache --virtual .tmp-build-deps \
         build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
-    rm -rf /tmp && \
+    /py/bin/pip install --no-cache-dir -r /tmp/requirements.txt && \
+    if [ "$DEV" = "true" ]; then \
+        /py/bin/pip install --no-cache-dir -r /tmp/requirements.dev.txt; \
+    fi && \
     apk del .tmp-build-deps && \
-    mkdir -p /data/web/static /data/web/media && \
-    chown -R duser:duser /data/web/static /data/web/media && \
-    chmod -R 755 /data/web/static /data/web/media && \
+    rm -rf /tmp
+
+# Criação de usuário sem privilégios e permissões corretas
+RUN adduser --disabled-password --no-create-home django-user && \
+    mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
+    chown -R django-user:django-user /app /vol && \
+    chmod -R 755 /vol && \
     chmod -R +x /scripts
 
-# Adiciona o diretório scripts ao PATH, permitindo a execução de seus comandos.
-ENV PATH="/scripts:$PATH"
-# Especifica o arquivo de script principal que será executado ao iniciar o contêiner.
-ENTRYPOINT ["/scripts/commands.sh"]
-RUN chmod +x /scripts/commands.sh
-
-# Define o usuário padrão como duser, garantindo que o contêiner não seja executado como root.
-USER duser
+# Define variáveis de ambiente
+ENV PATH="/scripts:/py/bin:$PATH"
 
 
+USER django-user
+
+# Executa o script de inicialização do contêiner
+CMD ["/scripts/commands.sh"]
+
+# Adiciona um HEALTHCHECK opcional
+HEALTHCHECK --interval=60s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1

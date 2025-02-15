@@ -1,54 +1,77 @@
 services:
   app:
-    container_name: app
     build:
       context: .
       args:
         - DEV=true
-
     ports:
-      - 8000:8000
-
+      - "8000:8000"
     volumes:
       - ./app:/app
-      - ./data/web/static:/data/web/static/
-      - ./data/web/media:/data/web/media/
-    env_file:
-    - ./dotenv_files/.env
-
-    depends_on:
-      psql:
-        condition: service_healthy
-
-    networks:
-      - app_network
-
-  psql:
-    container_name: psql
-    image: postgres:13-alpine
-
-    volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
-    env_file:
-    - ./dotenv_files/.env
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
 
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeit
+    depends_on:
+    - db
 
 
-    networks:
-      - app_network
-    restart: unless-stopped
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeit
 
-networks:
-  app_network:
-    driver: bridge
+
+
+
+    # volumes:
+    #   - ./app:/app
+      # - ./data/web/static:/data/web/static/
+      # - ./data/web/media:/data/web/media/
+    # env_file:
+    # - ./dotenv_files/.env
+
+    # depends_on:
+    #   psql:
+    #     condition: service_healthy
+
+    # networks:
+    #   - app_network
+
+#   psql:
+#     container_name: psql
+#     image: postgres:13-alpine
+
+#     volumes:
+#       - ./data/postgres/data:/var/lib/postgresql/data
+#     env_file:
+#     - ./dotenv_files/.env
+
+#     environment:
+#       POSTGRES_DB: ${POSTGRES_DB}
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready"]
+#       interval: 5s
+#       timeout: 5s
+#       retries: 5
+
+
+#     networks:
+#       - app_network
+#     restart: unless-stopped
+
+# networks:
+#   app_network:
+#     driver: bridge
 
