@@ -80,7 +80,7 @@ jobs:
         run: docker compose -f docker-compose.ci.yml exec app python manage.py migrate
 
       - name: Rodar Testes
-        run: docker compose -f docker-compose.ci.yml exec app pytest
+        run: docker compose -f docker-compose.ci.yml exec app test
 
       - name: Lint Code
         run: |
