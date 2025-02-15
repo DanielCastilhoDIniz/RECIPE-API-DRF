@@ -50,7 +50,7 @@ ENV PATH="/scripts:/py/bin:$PATH"
 USER django-user
 
 # Executa o script de inicialização do contêiner
-CMD ["/scripts/commands.sh"]
+CMD ["commands.sh"]
 
 # Adiciona um HEALTHCHECK opcional
 HEALTHCHECK --interval=60s --timeout=10s --start-period=10s --retries=3 \
