@@ -20,8 +20,13 @@ services:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=changeit
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U devuser -d devdb"]
       interval: 5s
       timeout: 5s
       retries: 5
+volumes:
+  postgres_data:
+  
