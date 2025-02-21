@@ -26,5 +26,5 @@ class Command(BaseCommand):
                 retries += 1
         if retries == max_retries:
             self.stdout.write(self.style.ERROR('❌ Database unavailable after 30 seconds. Exiting...'))
-            sys.exit(1)  # Encerra o programa com código de erro
+            sys.exit(1) 
         self.stdout.write(self.style.SUCCESS('✅ Database available! ✅ Postgres Database Started Successfully'))

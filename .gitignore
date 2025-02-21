@@ -274,3 +274,5 @@ pyrightconfig.json
 database/
 /data
 data
+/dotenfiles
+.env
