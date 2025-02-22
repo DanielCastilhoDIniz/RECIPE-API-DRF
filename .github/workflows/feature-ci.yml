@@ -79,8 +79,11 @@ jobs:
       - name: Rodar Migrações
         run: docker compose -f docker-compose.ci.yml exec app python manage.py migrate
 
+      - name: Verificar Status dos Contêineres
+        run: docker compose -f docker-compose.ci.yml ps
+
       - name: Rodar Testes
-        run: docker compose run --rm app sh -c "python manage.py test"
+        run: docker compose -f docker-compose.ci.yml run --rm app python manage.py test
 
       - name: Lint Code
         run: |
