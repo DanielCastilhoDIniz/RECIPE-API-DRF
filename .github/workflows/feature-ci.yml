@@ -39,6 +39,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           load: true
+          build-args: |
+            DEV=true
 
       - name: Criar arquivo .env dinamicamente
         run: |
