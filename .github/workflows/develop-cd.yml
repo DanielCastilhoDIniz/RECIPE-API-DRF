@@ -10,7 +10,7 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    environment: staging
+  
     permissions:
       deployments: write
 
