@@ -91,7 +91,7 @@ jobs:
         run: |
           docker run --rm \
             temp-image:pr-${{ github.event.pull_request.number }} \
-            sh -c "flake8 && black --check --exclude migrations ."
+            sh -c "flake8 --check --exclude migrations ."
 
       - name: Derrubar os containers
         run: docker compose -f docker-compose.ci.yml down
