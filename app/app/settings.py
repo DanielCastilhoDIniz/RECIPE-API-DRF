@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +21,17 @@ DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+
+# Load environment variables from .env file
+load_dotenv(BASE_DIR.parent / '.env')  # Carrega as variáveis do arquivo .env
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
 if not SECRET_KEY:
     raise ValueError("A SECRET_KEY não está definida no ambiente.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.getenv('DEBUG', 0)))
+DEBUG = bool(int(os.getenv('DEBUG', '0')))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 

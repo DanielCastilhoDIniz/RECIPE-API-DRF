@@ -5,10 +5,11 @@ services:
       context: .
       args:
         - DEV=false
+        - DEBUG=true
     volumes:
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
-      
+
     environment:
       - DB_HOST=db
       - DB_NAME=devdb
