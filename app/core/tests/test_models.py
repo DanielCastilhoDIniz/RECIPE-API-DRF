@@ -21,33 +21,37 @@ class ModelTests(TestCase):
         self.assertTrue(user.check_password(password),
                         "A senha não foi verificada corretamente.")
 
-    # def test_new_user_email_normalized(self):
-    #     """Test email is normalized for new users."""
-    #     sample_emails = [
-    #         ['test01@EXAMPLE.com', 'test01@example.com'],
-    #         ['Test02@Example.com', 'test02@example.com'],
-    #         ['TEST03@EXAMPLE.COM', 'test03@example.com'],
-    #         ['Test04@Example.COM', 'test04@example.com'],
-    #         ['TEST05@eXaMpLe.CoM', 'test05@example.com'],
-    #         ['TeSt06@ExAmPlE.cOm', 'test06@example.com'],
-    #         ['test07@EXAMPLE.COM', 'test07@example.com'],
-    #         ['TeSt08@example.COM', 'test08@example.com'],
-    #     ]
-    #     for email, excepted in sample_emails:
-    #         user = get_user_model().objects.create_user(email, 'sample123')
-    #         self.assertEqual(user.email, excepted)
+    def test_new_user_email_normalized(self):
+        """Test email is normalized for new users."""
+        sample_emails = [
+            ['test01@EXAMPLE.com', 'test01@example.com'],
+            ['Test02@Example.com', 'test02@example.com'],
+            ['TEST03@EXAMPLE.COM', 'test03@example.com'],
+            ['Test04@Example.COM', 'test04@example.com'],
+            ['TEST05@eXaMpLe.CoM', 'test05@example.com'],
+            ['TeSt06@ExAmPlE.cOm', 'test06@example.com'],
+            ['test07@EXAMPLE.COM', 'test07@example.com'],
+            ['TeSt08@example.COM', 'test08@example.com'],
+            ['TeSt09@example.COM ', 'test09@example.com'],
+            [' TeSt10@example.COM', 'test10@example.com'],
+            [' TeSt11@example.COM ', 'test11@example.com'],
+        ]
 
-    # def test_new_user_without_email_raises_error(self):
-    #     """Test that creating a user without an email raises a ValueError."""
-    #     with self.assertRaises(ValueError):
-    #         get_user_model().objects.create_user('', 'test123')
+        for email, expected in sample_emails:
+            user = get_user_model().objects.create_user(email, 'sample123')
+            self.assertEqual(user.email, expected)
 
-    # def test_create_superuser(self):
-    #     """Test creating a superuser"""
-    #     user = get_user_model().objects.create_superuser(
-    #         'test@example.com',
-    #         'test123',
-    #     )
+    def test_new_user_without_email_raises_error(self):
+        """Test that creating a user without an email raises a ValueError."""
+        with self.assertRaises(ValueError):
+            get_user_model().objects.create_user('', 'test123')
 
-    #     self.assertTrue(user.is_superuser)
-    #     self.assertTrue(user.is_staff)
+    def test_create_superuser(self):
+        """Test creating a superuser"""
+        user = get_user_model().objects.create_superuser(
+            'test@example.com',
+            'test123',
+        )
+
+        self.assertTrue(user.is_superuser)
+        self.assertTrue(user.is_staff)
