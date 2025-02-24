@@ -2,6 +2,7 @@
 Django command to wait for the database to be available
 """
 import time
+import sys
 
 from psycopg2 import OperationalError as Psycopg2OpError
 
@@ -21,10 +22,20 @@ class Command(BaseCommand):
                 self.check(databases=['default'])
                 db_up = True
             except (Psycopg2OpError, OperationalError):
-                self.stdout.write('🟡 Database unavailable, waiting 1 second...')
+                self.stdout.write(
+                    '🟡 Database unavailable, waiting 1 second...'
+                )
                 time.sleep(1)
                 retries += 1
         if retries == max_retries:
-            self.stdout.write(self.style.ERROR('❌ Database unavailable after 30 seconds. Exiting...'))
+            self.stdout.write(
+                self.style.ERROR(
+                    '❌ Database unavailable after 30 seconds. Exiting...'
+                )
+            )
             sys.exit(1)
-        self.stdout.write(self.style.SUCCESS('✅ Database available! ✅ Postgres Database Started Successfully'))
+        self.stdout.write(
+            self.style.SUCCESS(
+                '✅ Database available! ✅\
+                    Postgres Database Started Successfully'
+            ))
