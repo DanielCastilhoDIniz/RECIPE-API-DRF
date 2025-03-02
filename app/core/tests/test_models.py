@@ -16,7 +16,8 @@ class ModelTests(TestCase):
             email=email,
             password=password,
         )
-        self.assertEqual(user.email, email, f"Email {email} não foi salvo corretamente.")
+        self.assertEqual(user.email, email,
+                         f"Email {email} não foi salvo corretamente.")
         self.assertTrue(user.check_password(password),
                         "A senha não foi verificada corretamente.")
 
@@ -31,12 +32,14 @@ class ModelTests(TestCase):
             ['TeSt06@ExAmPlE.cOm', 'test06@example.com'],
             ['test07@EXAMPLE.COM', 'test07@example.com'],
             ['TeSt08@example.COM', 'test08@example.com'],
+            ['TeSt09@example.COM ', 'test09@example.com'],
+            [' TeSt10@example.COM', 'test10@example.com'],
+            [' TeSt11@example.COM ', 'test11@example.com'],
         ]
-        for email, excepted in sample_emails:
-            # Creates a user using the unnormalized email
+
+        for email, expected in sample_emails:
             user = get_user_model().objects.create_user(email, 'sample123')
-            # Checks if the user's email was correctly normalized
-            self.assertEqual(user.email, excepted)
+            self.assertEqual(user.email, expected)
 
     def test_new_user_without_email_raises_error(self):
         """Test that creating a user without an email raises a ValueError."""
