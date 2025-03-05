@@ -277,3 +277,4 @@ data
 /dotenfiles
 .env
 dotenv_files/
+venv
