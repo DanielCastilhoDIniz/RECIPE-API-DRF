@@ -279,3 +279,4 @@ data
 dotenv_files/
 venv
 \venv
+venv/
